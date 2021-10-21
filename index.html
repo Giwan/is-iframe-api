@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iFrame API service</title>
+    <style>
+        :root {
+            --unit: 16px;
+        }
+        body {
+            font-size: 24px; 
+            font-family: Arial, Helvetica, sans-serif;
+            padding: var(--unit);
+        }
+    </style>
+</head>
+<body>
+    <h1>iFrame API service</h1>
+    <p>
+        This is a small API that takes a website url as input and checks if the website allows for iFrames or not. 
+    </p>
+    <section>
+        <h2>Making requests</h2>
+        <p>
+            Format requests as shown below. Replace the example url, www.bbc.co.uk, with the domain to validate.
+        </p>
+        <p>
+            <code>
+                /api/url=www.bbc.co.uk
+            </code>
+        </p>
+    </section>
+    <section>
+        <h2>Response</h2>
+        <p>
+            The service replies with a JSON response indicating if iFraming is possible or not. 
+        </p>
+        <p>
+            <code>
+                {
+                    iframe: false
+                }
+            </code>
+        </p>
+    </section>
+</body>
+</html>
