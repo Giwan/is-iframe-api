@@ -29,7 +29,7 @@ const handler = (req, res) => {
         const xframeoptions = headers["X-Frame-Options"] || headers["x-frame-options"];
         res.json({
             url: options.hostname,
-            iframe: Boolean(xframeoptions && ["DENY", "SAMEORIGIN"].includes(xframeoptions))
+            iframe: !Boolean(xframeoptions && ["DENY", "SAMEORIGIN"].includes(xframeoptions))
         });
     });
 
