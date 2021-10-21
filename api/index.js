@@ -1,3 +1,5 @@
+const https = require("https");
+
 const allowCors = fn => async (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -16,11 +18,22 @@ const allowCors = fn => async (req, res) => {
   }
 
 const handler = (req, res) => {
-    res.json({
-        body: req.body,
-        query: req.query,
-        cookies: req.cookies,
+    const options = {
+        hostname: req.query.url,
+        port: 443,
+        method: "HEAD"
+    }
+
+    const newReq = https.request(options, (newRes) => {
+        const headers = newRes.headers;
+        const xframeoptions = headers["X-Frame-Options"] || headers["x-frame-options"];
+        res.json({
+            url: options.hostname,
+            iframe: Boolean(xframeoptions && ["DENY", "SAMEORIGIN"].includes(xframeoptions))
+        });
     });
+
+    newReq.end();
 };
 
 module.exports = allowCors(handler);
