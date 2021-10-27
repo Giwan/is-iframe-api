@@ -18,8 +18,11 @@ const allowCors = fn => async (req, res) => {
 }
 
 const handler = (req, res) => {
+
+    const url = new URL(req.query.url);
+
     const options = {
-        hostname: req.query.url.replace(/^http.:\/\//i, ""),
+        hostname: url.hostname,
         port: 443,
         method: "HEAD"
     }

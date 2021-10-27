@@ -1,8 +1,10 @@
 const https = require("https");
 
 const handler = () => {
+    const url = new URL(process.argv[2]);
+
     const options = {
-        hostname: process.argv[2],
+        hostname: url.hostname,
         port: 443,
         method: "HEAD"
     }
