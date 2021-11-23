@@ -1,3 +1,8 @@
+/**
+ * Run this file with `node test-server.js www.mathsisfun.com/place-value.html
+ * to check that url. 
+ */
+
 const https = require("https");
 const app = require("./api/index.js");
 
@@ -11,19 +16,10 @@ const handler = () => {
     }
 
     const newReq = https.request(options, (newRes) => {
-        const headers = newRes.headers;
-        // console.log("headers: ", headers);
-
-        // const xframeoptions = headers["X-Frame-Options"] || headers["x-frame-options"];
-        // if (xframeoptions && ["DENY", "SAMEORIGIN"].includes(xframeoptions)) {
-        //     console.log("this page does not allow iframing: ", xframeoptions); 
-        // } else {
-        //     console.log("page allows for iframing: ", xframeoptions);
-        // }
-
+        
     });
     newReq.query = {
-        url: "www.mathsisfun.com/place-value.html"
+        url
     }
     app(newReq, { setHeader: () => {}, json: (data) => console.log("json response: ", data) });
 

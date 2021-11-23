@@ -1,4 +1,5 @@
 const https = require("https");
+const { doesUrlAllowIframe } = require("./helper");
 
 const allowCors = fn => async (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -29,10 +30,10 @@ const handler = (req, res) => {
 
     const newReq = https.request(options, (newRes) => {
         const headers = newRes.headers;
-        const xframeoptions = headers["X-Frame-Options"] || headers["x-frame-options"];
+        
         res.json({
             url: options.hostname,
-            iframe: !Boolean(xframeoptions && ["DENY", "SAMEORIGIN", "ALLOW-FROM"].includes(xframeoptions))
+            iframe: doesUrlAllowIframe(headers)
         });
     });
 
