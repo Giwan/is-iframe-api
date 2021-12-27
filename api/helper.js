@@ -71,7 +71,13 @@ const doesUrlAllowIframe = (headers) => {
 
 }
 
+const prefixHTTPS = (url) => {
+    if (/^http.?:\/\//i.test(url)) return url;
+    return "https://"+url;
+}
+
 module.exports = {
     doesUrlAllowIframe,
-    isCSPAllowed
+    isCSPAllowed,
+    prefixHTTPS
 }

@@ -1,13 +1,15 @@
 /**
- * Run this file with `node test-server.js www.mathsisfun.com/place-value.html
+ * Run this file with `node test-server.js https://www.mathsisfun.com/place-value.html`
  * to check that url. 
  */
 
 const https = require("https");
 const app = require("./api/index.js");
+const demoUrl = "www.mathsisfun.com/place-value.html";
+const { prefixHTTPS } = require("./api/helper"); 
 
 const handler = () => {
-    const url = new URL(process.argv[2]);
+    const url = new URL(prefixHTTPS(process.argv[2] || demoUrl));
 
     const options = {
         hostname: url.hostname,
@@ -21,7 +23,9 @@ const handler = () => {
     newReq.query = {
         url
     }
-    app(newReq, { setHeader: () => {}, json: (data) => console.log("json response: ", data) });
+
+    const newOptions = { setHeader: () => {}, json: (data) => console.log("json response: ", data) };
+    app(newReq, newOptions);
 
     newReq.end();
 };

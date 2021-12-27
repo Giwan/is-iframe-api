@@ -1,5 +1,5 @@
 const https = require("https");
-const { doesUrlAllowIframe } = require("./helper");
+const { doesUrlAllowIframe, prefixHTTPS } = require("./helper");
 
 const allowCors = fn => async (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -20,7 +20,7 @@ const allowCors = fn => async (req, res) => {
 
 const handler = (req, res) => {
 
-    const url = new URL(req.query.url);
+    const url = new URL(prefixHTTPS(req.query.url));
 
     const options = {
         hostname: url.hostname,
@@ -28,16 +28,28 @@ const handler = (req, res) => {
         method: "HEAD"
     }
 
-    const newReq = https.request(options, (newRes) => {
-        const headers = newRes.headers;
-        
-        res.json({
-            url: options.hostname,
-            iframe: doesUrlAllowIframe(headers)
-        });
-    });
+    try {
 
-    newReq.end();
+        
+        const newReq = https.request(options, (newRes) => {
+            const headers = newRes.headers;
+            
+            res.json({
+                url: options.hostname,
+                iframe: doesUrlAllowIframe(headers)
+            });
+        });
+        newReq.end();
+        
+    } catch(e) {
+        res.json({
+            url: options.hostname, 
+            iframe: false, 
+            error: e?.message || e
+        })
+        newReq.end();
+    }
+
 };
 
 module.exports = allowCors(handler);
