@@ -1,6 +1,6 @@
 // const http = require("http");
 // const https = require("https");
-const { http, https } = require("follow-redirects");
+const { http } = require("follow-redirects");
 const { doesUrlAllowIframe, prefixHTTPS } = require("./helper");
 
 const allowCors = fn => async (req, res) => {
@@ -40,14 +40,12 @@ const handler = (req, res) => {
     const options = {
         hostname: url.hostname,
         port: 80,
-        method: "HEAD"
+        method: "HEAD",
+        rejectUnauthorized: false
     }
 
     try {
-        const newReq = http.request(options, (newRes) => {         
-            processHeaders(newRes, res, options);
-
-        });
+        const newReq = http.request(options, (newRes) => processHeaders(newRes, res, options));
         newReq.end();
 
     } catch (e) {
