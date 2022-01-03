@@ -1,5 +1,3 @@
-// const http = require("http");
-// const https = require("https");
 const { http } = require("follow-redirects");
 const { doesUrlAllowIframe, prefixHTTPS } = require("./helper");
 
@@ -14,8 +12,7 @@ const allowCors = fn => async (req, res) => {
         'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     );
     if (req.method === 'OPTIONS') {
-        res.status(200).end()
-        return
+        return res.status(200).end();
     }
     return await fn(req, res);
 }
@@ -41,7 +38,8 @@ const handler = (req, res) => {
         hostname: url.hostname,
         port: 80,
         method: "HEAD",
-        rejectUnauthorized: false
+        rejectUnauthorized: false,
+        timeout: 2000
     }
 
     try {
