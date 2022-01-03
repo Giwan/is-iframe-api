@@ -1,5 +1,7 @@
 const { doesUrlAllowIframe, isCSPAllowed } = require("./api/helper");
 
+console.log("Starting test"); 
+
 console.assert(doesUrlAllowIframe(), "Empty headers should mean that iFrame is allowed");
 console.assert(doesUrlAllowIframe({}), "Empty headers should mean that iFrame is allowed");
 
@@ -31,3 +33,5 @@ console.assert(!doesUrlAllowIframe({
 console.assert(!doesUrlAllowIframe({
     "x-content-security-policy": "frame-ancestors 'self' *.specless.io *.specless.tech http://*.seo.aws.about.com https://*.seo.aws.about.com http://*.dotdash.com https://*.dotdash.com *.thoughtco.com"
 }), "iFrame is not allowed through CSP but the test fails.");
+
+console.log("Finished");

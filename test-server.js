@@ -2,29 +2,30 @@
  * Run this file with `node test-server.js https://www.mathsisfun.com/place-value.html`
  * to check that url. 
  */
-
+const http = require("http");
 const https = require("https");
 const app = require("./api/index.js");
 const demoUrl = "www.mathsisfun.com/place-value.html";
-const { prefixHTTPS } = require("./api/helper"); 
+const { prefixHTTPS } = require("./api/helper");
 
 const handler = () => {
     const url = new URL(prefixHTTPS(process.argv[2] || demoUrl));
 
     const options = {
         hostname: url.hostname,
-        port: 443,
+        port: 80,
         method: "HEAD"
     }
 
-    const newReq = https.request(options, (newRes) => {
-        
-    });
-    newReq.query = {
-        url
-    }
+    const newReq = http.request(options); // create the request object
+    newReq.query = { url }; // add the query parameter
 
-    const newOptions = { setHeader: () => {}, json: (data) => console.log("json response: ", data) };
+    const newOptions = { 
+        setHeader: () => { }, 
+        json: () => { }
+    };
+    
+    // Call app with the new request
     app(newReq, newOptions);
 
     newReq.end();

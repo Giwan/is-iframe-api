@@ -1,3 +1,4 @@
+const http =require("http");
 const https = require("https");
 const { doesUrlAllowIframe, prefixHTTPS } = require("./helper");
 
@@ -24,20 +25,20 @@ const handler = (req, res) => {
 
     const options = {
         hostname: url.hostname,
-        port: 443,
+        port: 80,
         method: "HEAD"
     }
 
     try {
-
-        
-        const newReq = https.request(options, (newRes) => {
+        const newReq = http.request(options, (newRes) => {
             const headers = newRes.headers;
-            
-            res.json({
+
+            const jsonResponse = {
                 url: options.hostname,
                 iframe: doesUrlAllowIframe(headers)
-            });
+            }; 
+            
+            res.json(jsonResponse);
         });
         newReq.end();
         
