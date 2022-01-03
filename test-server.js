@@ -5,7 +5,8 @@
 const http = require("http");
 const https = require("https");
 const app = require("./api/index.js");
-const demoUrl = "www.mathsisfun.com/place-value.html";
+// const demoUrl = "www.mathsisfun.com/place-value.html";
+const demoUrl = "http://www.jpl.nasa.gov/";
 const { prefixHTTPS } = require("./api/helper");
 
 const handler = () => {
@@ -22,7 +23,8 @@ const handler = () => {
 
     const newOptions = { 
         setHeader: () => { }, 
-        json: () => { }
+        json: () => { }, 
+        log: (jsonResponse) => console.log("json response: ", JSON.stringify(jsonResponse))
     };
     
     // Call app with the new request

@@ -1,5 +1,6 @@
-const http =require("http");
-const https = require("https");
+// const http = require("http");
+// const https = require("https");
+const { http, https } = require("follow-redirects");
 const { doesUrlAllowIframe, prefixHTTPS } = require("./helper");
 
 const allowCors = fn => async (req, res) => {
@@ -19,6 +20,19 @@ const allowCors = fn => async (req, res) => {
     return await fn(req, res);
 }
 
+const processHeaders = function (newResponse, oldResponse, options) {
+    const headers = newResponse.headers;
+
+    const jsonResponse = {
+        url: options.hostname,
+        iframe: doesUrlAllowIframe(headers)
+    };
+
+    if (oldResponse.log) {
+        oldResponse.log(jsonResponse);
+    } else oldResponse.json(jsonResponse);
+}
+
 const handler = (req, res) => {
 
     const url = new URL(prefixHTTPS(req.query.url));
@@ -30,22 +44,16 @@ const handler = (req, res) => {
     }
 
     try {
-        const newReq = http.request(options, (newRes) => {
-            const headers = newRes.headers;
+        const newReq = http.request(options, (newRes) => {         
+            processHeaders(newRes, res, options);
 
-            const jsonResponse = {
-                url: options.hostname,
-                iframe: doesUrlAllowIframe(headers)
-            }; 
-            
-            res.json(jsonResponse);
         });
         newReq.end();
-        
-    } catch(e) {
+
+    } catch (e) {
         res.json({
-            url: options.hostname, 
-            iframe: false, 
+            url: options.hostname,
+            iframe: false,
             error: e?.message || e
         })
         newReq.end();
