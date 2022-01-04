@@ -1,0 +1,28 @@
+
+module.exports = [
+    "www.math-only-math.com",
+    "www.amathsdictionaryforkids.com",
+    "www.neok12.com",
+    "www.pbslearningmedia.org",
+    "www.kidzsearch.com",
+    "school.ebonline.in",
+    "www.khanacademy.org",
+    "classroom.thenational.academy",
+    "www.khanacademy.org",
+    "www.math-only-math.com",
+    "www.youtube.com",
+    "classroom.thenational.academy",
+    "www.youtube.com",
+    "www.onlinemathlearning.com",
+    "classroom.thenational.academy",
+    "www.youtube.com",
+    "www.math-only-math.com",
+    "www.math-only-math.com",
+    "www.youtube.com",
+    "www.math-only-math.com",
+    "https://www.bbc.co.uk/",
+    "http://animalfactguide.com",
+    "http://www.jpl.nasa.gov",
+    "http://manwrites.com",
+    "http://share.america.gov"
+];

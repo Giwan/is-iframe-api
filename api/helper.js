@@ -73,7 +73,7 @@ const doesUrlAllowIframe = (headers) => {
 
 const prefixHTTPS = (url) => {
     if (/^http.?:\/\//i.test(url)) return url;
-    return "https://"+url;
+    return "http://"+url;
 }
 
 module.exports = {
