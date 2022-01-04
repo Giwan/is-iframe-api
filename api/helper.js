@@ -71,8 +71,9 @@ const doesUrlAllowIframe = (headers) => {
 
 }
 
-const prefixHTTPS = (url) => {
+const prefixHTTPS = (url, isSSL) => {
     if (/^http.?:\/\//i.test(url)) return url;
+    if (isSSL) return "https://"+url;
     return "http://"+url;
 }
 
