@@ -22,25 +22,34 @@ const handler = async function(urlTarget) {
     const options = {
         hostname: url.hostname
     }
-    const resp = await fetch(url); 
-    const headers = resp.headers;
 
-    const formattedHeaders = {
-        [CONTENT_SECURITY_POLICY]: headers.get(CONTENT_SECURITY_POLICY),
-        [X_FRAME_OPTIONS]: headers.get(X_FRAME_OPTIONS)
+    try { 
 
+        const resp = await fetch(url); 
+        const headers = resp.headers;
+        
+        const formattedHeaders = {
+            [CONTENT_SECURITY_POLICY]: headers.get(CONTENT_SECURITY_POLICY),
+            [X_FRAME_OPTIONS]: headers.get(X_FRAME_OPTIONS)
+            
+        }
+        
+        const response = processHeaders(formattedHeaders, options);
+        
+        console.log({response});
+        return response;
+    } catch(e) {
+        return {
+            url: options.hostname,
+            iframe: false
+        }
     }
-
-    const response = processHeaders(formattedHeaders, options);
-
-    console.log({response});
-    return response;
 }
 
 // handler("https://bbc.co.uk");
 // handler("http://www.pbslearningmedia.org");
 // handler("https://phys.org");
 // handler("https://www.esl-lounge.com/");
-// new Set(testUrlList).forEach(url => handler(prefixHTTPS(url)));
+new Set(testUrlList).forEach(url => handler(prefixHTTPS(url)));
 
 module.exports = handler;

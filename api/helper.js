@@ -72,9 +72,10 @@ const doesUrlAllowIframe = (headers) => {
 }
 
 const prefixHTTPS = (url, isSSL) => {
-    if (/^http.?:\/\//i.test(url)) return url;
+    url = url.replace(/^http:/, "https:");
+    if (/^https:\/\//i.test(url)) return url;
     if (isSSL) return "https://"+url;
-    return "http://"+url;
+    return "https://"+url;
 }
 
 module.exports = {

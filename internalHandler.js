@@ -41,17 +41,14 @@ const handler = async function (urlTarget) {
 
     let resp; 
 
+    
     try {
-        resp = await fetchUrlHeaders(url);
-    } catch(e) {
-        try {
-            const httpsURL = new URL(prefixHTTPS(urlTarget, true))
-            resp = await fetchUrlHeaders(httpsURL);
-        } catch(err) {
-            return {
-                url: urlTarget,
-                iframe: false
-            }
+        const httpsURL = new URL(prefixHTTPS(urlTarget, true));
+        resp = await fetchUrlHeaders(httpsURL);
+    } catch(err) {
+        return {
+            url: urlTarget,
+            iframe: false
         }
     }
 
