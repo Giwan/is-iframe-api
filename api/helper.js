@@ -64,7 +64,10 @@ const doesUrlAllowIframe = (headers) => {
     if (isCSPAllowed(headers)) return true;
     if (isCSPBlocked(headers)) return false; // false if the CSP is explicitly blocked
 
-    const xframeoptions = headers["X-Frame-Options"] || headers["x-frame-options"];
+    let xframeoptions = headers["X-Frame-Options"] || headers["x-frame-options"];
+    if (/\s/i.test(xframeoptions) || /,/i.test(xframeoptions)) {
+        xframeoptions = xframeoptions.split(",")[0];
+    }
     const xframeAllow = !Boolean(xframeoptions && ["DENY", "SAMEORIGIN", "ALLOW-FROM"].includes(xframeoptions.toUpperCase())); 
     
     return xframeAllow;

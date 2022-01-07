@@ -1,9 +1,21 @@
-const fetch = require("node-fetch"); 
-const { prefixHTTPS } = require("../api/helper");
+"use strict";
 const internalHandler = require("../internalHandler");
 
-const handler = async (event, context) => {
-    const { queryStringParameters } = event;
+const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+}
+
+const handler = async (event) => {
+    const { queryStringParameters, httpMethod } = event;
+
+    if (/options/i.test(httpMethod)) {
+        return {
+            statusCode: 200,
+            headers,
+        }
+    }
 
     try {
 
@@ -11,7 +23,9 @@ const handler = async (event, context) => {
         
         return {
             statusCode: 200,
-            body: JSON.stringify(responseData)
+            body: JSON.stringify(responseData),
+            headers
+
         }
 
     } catch (err) {

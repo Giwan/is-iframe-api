@@ -50,6 +50,7 @@ const handler = async function(urlTarget) {
 // handler("http://www.pbslearningmedia.org");
 // handler("https://phys.org");
 // handler("https://www.esl-lounge.com/");
-new Set(testUrlList).forEach(url => handler(prefixHTTPS(url)));
+handler("https://www.shmoop.com/study-guides/math/basic-operations/subtracting-integers");
+// new Set(testUrlList).forEach(url => handler(prefixHTTPS(url)));
 
 module.exports = handler;
