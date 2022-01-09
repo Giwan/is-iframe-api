@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iFrame API service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Source+Code+Pro:wght@400;600&amp;display=auto" rel="stylesheet">
     <link href="index.css" rel="stylesheet" />
 </head>
 <body class="main">
@@ -13,7 +16,7 @@
         <p>
             Provide a given URL as input and the API reports back if this URL can be displayed in an iFrame or not. 
         </p>
-        <p><code>{ iframe: false }</code> indicates that it won't render in an iFrame. </p>
+        <p><code>{ iframe: false }</code> indicates that the site won't render in an iFrame. </p>
         <p>
             Validation is both on <code>X-Frame-Options</code> and <code>Content Security Policy</code>
         </p>
@@ -34,7 +37,7 @@
         <section>
             <h2>Response</h2>
             <p>
-                The service replies with a JSON response indicating if iFraming is possible or not. 
+                A JSON response is returned indicating if iFraming is possible or not. 
             </p>
             <p>
                 <code>

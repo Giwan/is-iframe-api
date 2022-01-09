@@ -5,15 +5,17 @@
 
     /* colors */
     --white: whitesmoke;
-    --color-primary: steelblue;
-    --color-secondary: #292929;
+    --color-primary: skyblue;
+    --color-secondary: #4b6da4;
+    --color-text-dark: #292929;
+    --color-background: #292929;
 }
 body {
     font-size: 24px; 
-    font-family: Helvetica, arial, sans-serif;
+    font-family: Inter, Helvetica, arial, sans-serif;
     padding: var(--unit);
-    background-color: #292929;
-    color: var(--white);;
+    background-color: var(--color-secondary);
+    color: var(--color-text-dark);
     line-height: 1.35em;
 }
 
@@ -31,7 +33,7 @@ aside {
 }
 
 code {
-    color: skyblue;
+    color: var(--color-primary);
     overflow-x: scroll;
     font-size: var(--font-size-small);
     font-family: monospace;
@@ -81,8 +83,8 @@ iframe {
 #form {
     border: 0;
     padding: 0;
-    background-color: var(--white);
-    color: skyblue;
+    background-color: var(--color-background);
+    color: var(--color-primary);
 
 }
 
@@ -109,13 +111,14 @@ iframe {
     padding-left: var(--unit);
     background-color: transparent;
     outline: none;
+    color: var(--white);
 }
 
 #form button {
     width: 50px;
     height: 100%;
     font-size: var(--font-size);
-    background-color: skyblue;
+    background-color: var(--color-primary);
     display: inline-block;
     border: 0;
     border-radius: calc(var(--unit) /2);
@@ -140,5 +143,5 @@ iframe {
 #iframe {
     height: calc(100% - 2px);
     width: calc(100% - 2px);
-    border: 1px solid var(--color-primary);
+    border: 1px dashed var(--color-background);
 }
