@@ -5,28 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sandbox</title>
+    <link href="index.css" rel="stylesheet" />
 </head>
-<body>
-    <h1>Sandbox</h1>
-
+<body class="iframeContainer">
     <form id="form">
         <fieldset>
-            <label>Url</label>
-            <input type="text" id="url" />
+            <label>HTTPS://</label>
+            <input type="text" id="url" placeholder="mytoori.com" />
             <button>Go</button>
+            <a href="/">X</a>
         </fieldset>
     </form>
 
-    <iframe id="iframe" width="100%"></iframe>
-    <script>
-        function checkInIframe(e) {
-            e.preventDefault();
-            const url = document.getElementById("url").value;
-            const iframeEl = document.getElementById("iframe");
-            iframeEl.src = url;
-        }
-        const form = document.getElementById("form");
-        form.addEventListener("submit", checkInIframe);
-    </script>
+    <iframe id="iframe"></iframe>
+    <script src="sandbox.js"></script>
 </body>
 </html>

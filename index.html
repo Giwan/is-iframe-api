@@ -5,45 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iFrame API service</title>
-    <style>
-        :root {
-            --unit: 16px;
-        }
-        body {
-            font-size: 24px; 
-            font-family: Arial, Helvetica, sans-serif;
-            padding: var(--unit);
-        }
-    </style>
+    <link href="index.css" rel="stylesheet" />
 </head>
-<body>
-    <h1>iFrame API service</h1>
-    <p>
-        This is a small API that takes a website url as input and checks if the website allows for iFrames or not. 
-    </p>
-    <section>
-        <h2>Making requests</h2>
+<body class="main">
+    <article>
+        <h1>iFrame API service</h1>
         <p>
-            Format requests as shown below. Replace the example url, www.bbc.co.uk, with the domain to validate.
+            Provide a given URL as input and the API reports back if this URL can be displayed in an iFrame or not. 
         </p>
+        <p><code>{ iframe: false }</code> indicates that it won't render in an iFrame. </p>
         <p>
-            <code>
-                /api/url=www.bbc.co.uk
-            </code>
+            Validation is both on <code>X-Frame-Options</code> and <code>Content Security Policy</code>
         </p>
-    </section>
-    <section>
-        <h2>Response</h2>
+    </article>
+    <aside>
+        <section>
+            <h2>Requests</h2>
+            <p>
+                Format requests as shown below. Replace the example url, www.bbc.co.uk, with the domain to validate.
+            </p>
+            <p>
+                <code>
+                    https://allows-iframe.netlify.app/.netlify/functions/is-iframe?url=www.bbc.co.uk
+                </code>
+            </p>
+            <a href="/.netlify/functions/is-iframe?url=www.bbc.co.uk" target="_blank" class="tryButton">Try it</a>
+        </section>
+        <section>
+            <h2>Response</h2>
+            <p>
+                The service replies with a JSON response indicating if iFraming is possible or not. 
+            </p>
+            <p>
+                <code>
+                    {
+                        url: "https://www.bbc.co.uk",
+                        iframe: false
+                    }
+                </code>
+            </p>
+        </section>
+    </aside>
+    <article class="iframeSandbox">
+        <header>
+            <h2>Iframe sandbox</h2>
+        </header>
         <p>
-            The service replies with a JSON response indicating if iFraming is possible or not. 
+            Enter the site you would like to test in an iframe. 
+            <a href="sandbox.html" title="iframe sandbox page">iFrame sandbox</a>
         </p>
-        <p>
-            <code>
-                {
-                    iframe: false
-                }
-            </code>
-        </p>
-    </section>
+    </article>
 </body>
 </html>
