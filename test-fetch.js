@@ -9,7 +9,7 @@ const testUrlList = require("./testUrlList");
 
 const processHeaders = function(headers, options) {
     return jsonResponse = {
-        url: options.hostname,
+        url: options.href,
         iframe: doesUrlAllowIframe(headers)
     }
 }
@@ -20,7 +20,8 @@ const CONTENT_SECURITY_POLICY = "content-security-policy";
 const handler = async function(urlTarget) {
     const url = new URL(urlTarget);
     const options = {
-        hostname: url.hostname
+        hostname: url.hostname,
+        href: url.href
     }
 
     try { 

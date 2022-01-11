@@ -3,9 +3,9 @@
 const fs = require("fs");
 const { readCSV } = require("nodecsv");
 
-const targetFile = "./filterdOutput.csv";
+const defaultTargetFile = "./filterdOutput.csv";
 
-(function() {
+const writeTotal = function(targetFile = defaultTargetFile) {
     readCSV(targetFile, function(error, data) {
         const totalRows = data.length;
         let yesValues = 0, noValues = 0;
@@ -26,4 +26,6 @@ const targetFile = "./filterdOutput.csv";
             if (error) console.error(error);
         }); 
     })
-})();
+};
+
+module.exports = writeTotal;

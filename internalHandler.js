@@ -16,7 +16,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 const processHeaders = function (headers, options) {
     return {
-        url: options.hostname,
+        url: options.href,
         iframe: doesUrlAllowIframe(headers)
     }
 }
@@ -36,11 +36,11 @@ const fetchUrlHeaders = function(url) {
 const handler = async function (urlTarget) {
     const url = new URL(prefixHTTPS(urlTarget));
     const options = {
-        hostname: url.hostname
+        hostname: url.hostname,
+        href: url.href
     }
 
     let resp; 
-
     
     try {
         const httpsURL = new URL(prefixHTTPS(urlTarget, true));
