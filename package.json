@@ -2,6 +2,7 @@
   "dependencies": {
     "follow-redirects": "^1.14.6",
     "netlify-cli": "^8.6.17",
-    "node-fetch": "^2.6.6"
+    "node-fetch": "^2.6.6",
+    "nodecsv": "^1.1.0"
   }
 }
