@@ -3,13 +3,16 @@
 const fs = require("fs");
 const { readCSV } = require("nodecsv");
 
-const defaultTargetFile = "./filterdOutput.csv";
+const defaultTargetFile = "./filterdOutput1.csv";
 
 const writeTotal = function(targetFile = defaultTargetFile) {
     readCSV(targetFile, function(error, data) {
         const totalRows = data.length;
-        let yesValues = 0, noValues = 0;
+        let yesValues = 0, 
+        noValues = 0,
+        unknown = 0;
         data.forEach((row) => {
+            if (row[1] === "unknown") return unknown += 1;
             Boolean(row[1] === "true") 
             ? yesValues += 1
             : noValues += 1;
@@ -18,6 +21,7 @@ const writeTotal = function(targetFile = defaultTargetFile) {
         const output = `
         Yes: ${yesValues} | ${(yesValues/totalRows)*100}%
         No:  ${noValues} | ${(noValues/totalRows)*100}%
+        ?:   ${unknown} | ${(unknown/totalRows)*100}%
         =====
         Total: ${totalRows}
         `
@@ -27,5 +31,7 @@ const writeTotal = function(targetFile = defaultTargetFile) {
         }); 
     })
 };
+
+writeTotal();
 
 module.exports = writeTotal;

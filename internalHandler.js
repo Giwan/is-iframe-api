@@ -28,12 +28,13 @@ const fetchUrlHeaders = function(url) {
     return fetch(url, {
         method: "HEAD",
         rejectUnauthorized: false,
-        timeout: 2500,
+        timeout: 600000, // 10 minutes
         redirect: "follow"
     });
 }
 
 const handler = async function (urlTarget) {
+    console.time(urlTarget);
     const url = new URL(prefixHTTPS(urlTarget));
     const options = {
         hostname: url.hostname,
@@ -48,7 +49,7 @@ const handler = async function (urlTarget) {
     } catch(err) {
         return {
             url: urlTarget,
-            iframe: false
+            iframe: "unknown"
         }
     }
 
@@ -57,9 +58,8 @@ const handler = async function (urlTarget) {
     const formattedHeaders = {
         [CONTENT_SECURITY_POLICY]: headers.get(CONTENT_SECURITY_POLICY),
         [X_FRAME_OPTIONS]: headers.get(X_FRAME_OPTIONS)
-
     }
-
+    console.timeEnd(urlTarget);
     return processHeaders(formattedHeaders, options);
 }
 
